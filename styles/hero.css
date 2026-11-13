@@ -1,0 +1,461 @@
+/* ==========================================================================
+   Hero Banner Blocks (section.section.section-hero)
+   Matches DESIGN_SPEC.md Sections 1.2, 2.1, 2.3, 3.3
+   ========================================================================== */
+
+:root {
+  --hero-content-height: 692px;
+  --holiday-background: #5A122C;
+}
+
+@media only screen and (max-width: 1440px) {
+  :root {
+    --hero-content-height: 650px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  :root {
+    --hero-content-height: 580px;
+  }
+}
+
+@media only screen and (max-width: 833px) {
+  :root {
+    --hero-content-height: 570px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  :root {
+    --hero-content-height: 500px;
+  }
+}
+
+section.section.section-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: var(--hero-content-height);
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: var(--sk-tile-background, #f5f5f7);
+  color: var(--sk-body-text-color, #1d1d1f);
+  text-align: center;
+}
+
+.hero-tile.theme-dark,
+.hero-tile.tile-macbook-proled {
+  background-color: var(--sk-tile-background, #000000);
+  color: var(--sk-body-text-color, #f5f5f7);
+}
+
+.hero-tile .unit-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  text-decoration: none;
+}
+
+/* Full-bleed background <picture> / <img> */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-media picture,
+.hero-media img,
+.hero-media video,
+.hero-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.hero-media .hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-media .hero-static-picture {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Centered / top-aligned copy overlay (default for standard hero tiles like iPhone Duo / MacBook Pro) */
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 680px;
+  margin-inline: auto;
+  padding-top: 55px;
+  padding-inline: 24px;
+  pointer-events: none;
+}
+
+.hero-copy a,
+.hero-copy button,
+.hero-copy .holiday-color-switcher {
+  pointer-events: auto;
+}
+
+.hero-copy .headline {
+  margin: 0;
+  font-family: var(--sk-font-family-display, "SF Pro Display", sans-serif);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--sk-headline-text-color, inherit);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-copy .subhead {
+  margin: 6px 0 0;
+  font-family: var(--sk-font-family-display, "SF Pro Display", sans-serif);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--sk-body-text-color, inherit);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+@media only screen and (max-width: 1068px) {
+  .hero-copy {
+    padding-top: 47px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  .hero-copy {
+    padding-top: 37px;
+  }
+
+  .hero-cta-links {
+    margin-top: 14px;
+    gap: 12px;
+  }
+}
+
+/* ==========================================================================
+   Holiday 2026 Tile ([data-tile-id="holiday-2026"])
+   Bottom copy alignment & color variant backgrounds to avoid text/image overlap
+   ========================================================================== */
+
+[data-tile-id="holiday-2026"] {
+  background-color: var(--holiday-background, #5A122C);
+  color: #f5f5f7;
+  overflow: clip;
+}
+
+/* Color variant backgrounds */
+[data-tile-id="holiday-2026"][data-holiday-variant="pink"],
+[data-tile-id="holiday-2026"][data-holiday-active="pink"] {
+  --holiday-background: #5A122C;
+}
+
+[data-tile-id="holiday-2026"][data-holiday-variant="blue"],
+[data-tile-id="holiday-2026"][data-holiday-active="blue"] {
+  --holiday-background: #00224D;
+}
+
+[data-tile-id="holiday-2026"][data-holiday-variant="green"],
+[data-tile-id="holiday-2026"][data-holiday-active="green"] {
+  --holiday-background: #1A4C44;
+}
+
+[data-tile-id="holiday-2026"][data-holiday-variant="yellow"],
+[data-tile-id="holiday-2026"][data-holiday-active="yellow"] {
+  --holiday-background: #822704;
+}
+
+/* Holiday Tile Wrapper padding across responsive breakpoints */
+[data-tile-id="holiday-2026"] .tile-wrapper,
+[data-tile-id="holiday-2026"] {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: var(--hero-content-height);
+  box-sizing: border-box;
+  overflow: clip;
+  padding: 48px 0 56px;
+}
+
+@media only screen and (min-width: 1069px) and (min-height: 776px) {
+  [data-tile-id="holiday-2026"] .tile-wrapper,
+  [data-tile-id="holiday-2026"] {
+    padding: 56px 0 63px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  [data-tile-id="holiday-2026"] .tile-wrapper,
+  [data-tile-id="holiday-2026"] {
+    padding: 54px 0 61px;
+  }
+}
+
+@media only screen and (min-width: 735px) and (max-width: 1068px) and (min-height: 734px) {
+  [data-tile-id="holiday-2026"] .tile-wrapper,
+  [data-tile-id="holiday-2026"] {
+    padding: 61px 0 69px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  [data-tile-id="holiday-2026"] .tile-wrapper,
+  [data-tile-id="holiday-2026"] {
+    padding: 39px 0 43px;
+  }
+}
+
+/* Bottom-aligned copy container for Holiday 2026 */
+[data-tile-id="holiday-2026"] .tile-content.content-bottom,
+[data-tile-id="holiday-2026"] .hero-copy.content-bottom {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  padding-top: 0;
+  margin-top: auto;
+}
+
+/* Crisp text contrast in dark theme / holiday */
+.theme-dark .tile-copy-wrapper,
+[data-tile-id="holiday-2026"] .hero-copy,
+[data-tile-id="holiday-2026"] .tile-content {
+  color: #f5f5f7;
+}
+
+[data-tile-id="holiday-2026"] .headline,
+[data-tile-id="holiday-2026"] .subhead {
+  color: #f5f5f7;
+}
+
+/* Upper/center area image wrapper leaving bottom unobstructed */
+[data-tile-id="holiday-2026"] .hero-media,
+[data-tile-id="holiday-2026"] .tile-image-wrapper,
+[data-tile-id="holiday-2026"] .content-bottom + .tile-image-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: auto;
+  width: 100%;
+  height: var(--hero-content-height);
+  z-index: 1;
+}
+
+[data-tile-id="holiday-2026"] .hero-media img,
+[data-tile-id="holiday-2026"] .tile-image-wrapper img,
+[data-tile-id="holiday-2026"] .hero-video {
+  position: absolute;
+  inset-inline-start: 50%;
+  transform: translate(-50%);
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
+}
+
+[data-tile-id="holiday-2026"] .hero-video {
+  z-index: 2;
+}
+
+[data-tile-id="holiday-2026"] .hero-static-picture {
+  z-index: 1;
+}
+
+/* Interactive color switcher pills for Holiday 2026 */
+.holiday-color-switcher {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 6px 12px;
+  border-radius: 980px;
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+}
+
+.holiday-color-pill {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  outline: none;
+}
+
+.holiday-color-pill[data-variant="pink"],
+.holiday-color-pill.pill-pink {
+  background-color: #ff4f8b;
+}
+
+.holiday-color-pill[data-variant="blue"],
+.holiday-color-pill.pill-blue {
+  background-color: #2997ff;
+}
+
+.holiday-color-pill[data-variant="green"],
+.holiday-color-pill.pill-green {
+  background-color: #30d158;
+}
+
+.holiday-color-pill[data-variant="yellow"],
+.holiday-color-pill.pill-yellow {
+  background-color: #ffd60a;
+}
+
+.holiday-color-pill:hover {
+  transform: scale(1.1);
+}
+
+.holiday-color-pill.is-active,
+.holiday-color-pill[aria-pressed="true"] {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.85);
+  transform: scale(1.12);
+}
+
+.holiday-color-pill:focus-visible {
+  box-shadow: 0 0 0 3px #0071e3;
+}
+
+/* ==========================================================================
+   iPhone Duo Tile ([data-tile-id="iphone-duo"])
+   1. Clear any border/outline artifacts at top edge
+   2. Staggered animated subhead ("Hello, hello.")
+   ========================================================================== */
+
+[data-tile-id="iphone-duo"] {
+  position: relative;
+  border: none !important;
+  border-top: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+[data-tile-id="iphone-duo"]::before,
+[data-tile-id="iphone-duo"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+[data-tile-id="iphone-duo"] .hero-media {
+  top: 0;
+  margin-top: 0;
+  border: none !important;
+  outline: none !important;
+  overflow: hidden;
+}
+
+[data-tile-id="iphone-duo"] .hero-video,
+[data-tile-id="iphone-duo"] .hero-media video,
+[data-tile-id="iphone-duo"] .hero-media picture,
+[data-tile-id="iphone-duo"] .hero-media img {
+  border: none !important;
+  border-top: none !important;
+  outline: none !important;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.iphone-duo-subhead {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28em;
+  font-family: var(--sk-font-family-display, "SF Pro Display", sans-serif);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--sk-body-text-color, #1d1d1f);
+  -webkit-font-smoothing: antialiased;
+}
+
+.iphone-duo-subhead .subhead-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(0.28, 0.11, 0.32, 1),
+              transform 0.7s cubic-bezier(0.28, 0.11, 0.32, 1);
+  will-change: opacity, transform;
+}
+
+/* "Hello," word 1 appears first */
+.hero-tile[data-tile-id="iphone-duo"].is-revealed .iphone-duo-subhead .subhead-word-1,
+.hero-tile[data-tile-id="iphone-duo"].animate-subhead .iphone-duo-subhead .subhead-word-1 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.1s;
+}
+
+/* "hello." word 2 appears 0.5s later */
+.hero-tile[data-tile-id="iphone-duo"].is-revealed .iphone-duo-subhead .subhead-word-2,
+.hero-tile[data-tile-id="iphone-duo"].animate-subhead .iphone-duo-subhead .subhead-word-2 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.6s;
+}
+
+/* ==========================================================================
+   MacBook Pro PROLED XDR Display Gradient Text
+   ========================================================================== */
+
+.tile-macbook-proled .subhead,
+.proled-xdr-subhead {
+  display: inline-block;
+  background: linear-gradient(90deg, #f5c518 0%, #ffdf6d 22%, #d8efff 42%, #4ea8ff 65%, #0071e3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: var(--sk-font-family-display, "SF Pro Display", sans-serif);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}

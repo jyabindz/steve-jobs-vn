@@ -1,0 +1,723 @@
+/* ==========================================================================
+   Apple.com Homepage — Endless Entertainment Gallery (Apple TV+ & FAM Services)
+   Reference: DESIGN_SPEC.md 1.5, 1.5A, 1.5B, 2.3, 3.3, 4.5
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Section Wrapper
+   -------------------------------------------------------------------------- */
+.endless-entertainment {
+  background-color: #f5f5f7;
+  padding-top: 53px;
+  padding-bottom: 64px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1068px) {
+  .endless-entertainment {
+    padding-top: 36px;
+    padding-bottom: 48px;
+  }
+}
+
+.endless-entertainment .media-gallery-headline {
+  font-family: var(--sk-font-family-display, "SF Pro Display", sans-serif);
+  font-size: 56px;
+  line-height: 1.0714285714;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+@media only screen and (max-width: 1068px) {
+  .endless-entertainment .media-gallery-headline {
+    font-size: 32px;
+    line-height: 1.125;
+    letter-spacing: 0.004em;
+    margin-bottom: 24px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Common Media Gallery Styles
+   -------------------------------------------------------------------------- */
+.media-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.media-gallery-wrapper-link {
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  text-decoration: none !important;
+  z-index: 4;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  border-radius: 18px;
+  width: 100%;
+  height: 100%;
+}
+
+.media-gallery-contents {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.media-gallery-bottom-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+  transition: opacity 0.4s ease;
+}
+
+.media-gallery-longnote {
+  font-family: var(--sk-font-family-display, "SF Pro Display", sans-serif);
+  font-size: 21px;
+  line-height: 1.1904761905;
+  font-weight: 400;
+  letter-spacing: 0.011em;
+  color: #f5f5f7;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+}
+
+@media only screen and (max-width: 1068px) {
+  .media-gallery-longnote {
+    font-family: var(--sk-font-family-text, "SF Pro Text", sans-serif);
+    font-size: 17px;
+    line-height: 1.2353641176;
+    letter-spacing: -0.022em;
+  }
+}
+
+.media-gallery-longnote .genre {
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   3. Apple TV+ Main Carousel (#tv-media-gallery)
+   -------------------------------------------------------------------------- */
+#tv-media-gallery {
+  --media-gallery-tile-gap: 13px;
+  --media-gallery-tile-width: 1250px;
+  --media-gallery-tile-height: 668px;
+  --media-gallery-slide-duration: 800ms;
+  --media-gallery-bottom-copy-duration: 600ms;
+  --media-gallery-button-margin-top: 0px;
+  margin-bottom: 24px;
+}
+
+@media only screen and (max-width: 1440px) {
+  #tv-media-gallery {
+    --media-gallery-tile-width: 930px;
+    --media-gallery-tile-height: 523px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  #tv-media-gallery {
+    --media-gallery-tile-width: 688px;
+    --media-gallery-tile-height: 367px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  #tv-media-gallery {
+    --media-gallery-tile-width: 275px;
+    --media-gallery-tile-height: 496px;
+    --media-gallery-button-margin-top: 13px;
+  }
+}
+
+#tv-media-gallery .media-gallery-item-container {
+  position: relative;
+  width: calc(var(--media-gallery-tile-width) + var(--media-gallery-tile-gap));
+  height: var(--media-gallery-tile-height);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: visible;
+}
+
+#tv-media-gallery .media-gallery-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--media-gallery-tile-width);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: unset;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  transition: transform var(--media-gallery-slide-duration) cubic-bezier(0.25, 1, 0.5, 1),
+              opacity var(--media-gallery-slide-duration) cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.45;
+}
+
+#tv-media-gallery .media-gallery-item .media-gallery-wrapper-link {
+  pointer-events: none;
+}
+
+#tv-media-gallery .media-gallery-item.current-item {
+  opacity: 1;
+  z-index: 5;
+}
+
+#tv-media-gallery .media-gallery-item.current-item .media-gallery-wrapper-link {
+  pointer-events: all;
+}
+
+#tv-media-gallery .media-gallery-item .media-gallery-bottom-content {
+  opacity: 0.36;
+}
+
+#tv-media-gallery .media-gallery-item.current-item .media-gallery-bottom-content {
+  opacity: 1;
+}
+
+/* TV+ Scrim Gradient */
+#tv-media-gallery .media-gallery-contents {
+  background: radial-gradient(100% 33% at left bottom, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0));
+}
+
+@media only screen and (max-width: 734px) {
+  #tv-media-gallery .media-gallery-contents {
+    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7)),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0) 200px);
+  }
+}
+
+/* Background Artwork Images */
+#tv-media-gallery .media-gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Bottom Content Layout */
+#tv-media-gallery .media-gallery-bottom-content {
+  padding-left: 70px;
+  padding-bottom: 58px;
+  padding-right: 70px;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 1440px) {
+  #tv-media-gallery .media-gallery-bottom-content {
+    padding-left: 48px;
+    padding-bottom: 40px;
+    padding-right: 48px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  #tv-media-gallery .media-gallery-bottom-content {
+    padding-left: 43px;
+    padding-bottom: 34px;
+    padding-right: 43px;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  #tv-media-gallery .media-gallery-bottom-content {
+    padding-left: 15px;
+    padding-bottom: 30px;
+    padding-right: 15px;
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+/* TV Gallery Buttons */
+#tv-media-gallery .button.media-gallery-button {
+  background-color: rgb(245, 245, 247);
+  color: rgb(0, 0, 0);
+  border-radius: 980px;
+  flex-shrink: 0;
+  margin-top: var(--media-gallery-button-margin-top);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sk-font-family-text, sans-serif);
+  font-size: 14px;
+  line-height: 1.2857742857;
+  font-weight: 400;
+  letter-spacing: -0.016em;
+  padding: 9px 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+@media only screen and (min-width: 1069px) {
+  #tv-media-gallery .button.media-gallery-button {
+    padding: 12px 22px;
+    min-width: 70px;
+    font-size: 17px;
+    line-height: 1.1764805882;
+    letter-spacing: -0.022em;
+  }
+}
+
+#tv-media-gallery .button.media-gallery-button:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+#tv-media-gallery .button.media-gallery-button:active {
+  background-color: #ededf2;
+}
+
+/* TV Title Logo */
+.tv-gallery-media-logo {
+  max-height: 54px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+@media only screen and (max-width: 734px) {
+  .tv-gallery-media-logo {
+    max-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Dot Navigation & Play/Pause Controls (.media-gallery-dotnav)
+   -------------------------------------------------------------------------- */
+.media-gallery-dotnav.dotnav.dotnav-scrim-solid.dotnav-timed {
+  --media-gallery-dotnav-gap: 12px;
+  --sk-dotnav-iconcontrol-icon-size: 24px;
+  margin-top: var(--media-gallery-dotnav-gap);
+  margin-bottom: var(--media-gallery-dotnav-gap);
+  width: 100%;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  order: 4;
+}
+
+@media only screen and (max-width: 734px) {
+  .media-gallery-dotnav.dotnav.dotnav-scrim-solid.dotnav-timed {
+    --media-gallery-dotnav-gap: 10px;
+  }
+}
+
+.dotnav.dotnav-scrim-solid .dotnav-items {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 4px 8px;
+  background: rgb(232, 232, 237);
+  border-radius: 999px;
+  gap: 8px;
+}
+
+.dotnav-item {
+  display: flex;
+  align-items: center;
+}
+
+.dotnav-item .dotnav-button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.48);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.6, 1),
+              border-radius 0.25s cubic-bezier(0.4, 0, 0.6, 1),
+              background-color 0.24s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.dotnav-item .dotnav-button:hover {
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+.dotnav-item.current-item .dotnav-button {
+  width: 32px;
+  border-radius: 4px;
+  background-color: rgb(0, 0, 0);
+  animation: dotnav-timed-dot-expand 250ms ease-out;
+}
+
+/* Apple Streaming DotNav Production Keyframes (DESIGN_SPEC 7.2) */
+@keyframes dotnav-timed-animation {
+  0% { width: 8px; }
+  100% { width: 32px; }
+}
+
+@keyframes dotnav-timed-dot-expand {
+  0% { width: 8px; }
+  100% { width: 32px; }
+}
+
+@keyframes dotnav-timed-dot-shrink {
+  0% { width: 32px; }
+  100% { width: 8px; }
+}
+
+@keyframes dotnav-shift-start-1 {
+  0% { translate: 8px; }
+  100% { translate: 0px; }
+}
+
+@keyframes dotnav-shift-end-1 {
+  0% { translate: -8px; }
+  100% { translate: 0px; }
+}
+
+/* Play/Pause Button */
+.media-gallery-dotnav-iconcontrol.dotnav-iconcontrol {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  background: rgba(210, 210, 215, 0.64);
+  color: rgba(0, 0, 0, 0.48);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@media only screen and (max-width: 734px) {
+  .media-gallery-dotnav-iconcontrol.dotnav-iconcontrol {
+    right: calc(10px + env(safe-area-inset-right, 0px));
+  }
+}
+
+.media-gallery-dotnav-iconcontrol.dotnav-iconcontrol:hover {
+  background: rgba(223, 223, 227, 0.6976);
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.media-gallery-dotnav-iconcontrol svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   5. Services Gallery (#fam-media-gallery)
+   -------------------------------------------------------------------------- */
+#fam-media-gallery {
+  --media-gallery-tile-gap: 13px;
+  --media-gallery-tile-width: 470px;
+  --media-gallery-tile-height: 264px;
+  margin-top: 13px;
+  width: 100%;
+  position: relative;
+}
+
+@media only screen and (max-width: 1440px) {
+  #fam-media-gallery {
+    --media-gallery-tile-width: 417px;
+    --media-gallery-tile-height: 234px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  #fam-media-gallery {
+    --media-gallery-tile-width: 188px;
+    --media-gallery-tile-height: 254px;
+  }
+}
+
+.fam-media-gallery-container {
+  display: flex;
+  gap: var(--media-gallery-tile-gap, 13px);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 max(22px, env(safe-area-inset-left, 22px)) 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fam-media-gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+.fam-media-gallery .fam-card {
+  flex: 0 0 var(--media-gallery-tile-width);
+  width: var(--media-gallery-tile-width);
+  height: var(--media-gallery-tile-height);
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* Distinct Item Background Colors */
+.fam-media-gallery .fam-card[data-item="1"] { background-color: #f4f8fb; }
+.fam-media-gallery .fam-card[data-item="2"] { background-color: #000000; }
+.fam-media-gallery .fam-card[data-item="3"] { background-color: #24568e; }
+.fam-media-gallery .fam-card[data-item="4"] { background-color: #9fc6f4; }
+.fam-media-gallery .fam-card[data-item="5"] { background-color: #300402; }
+.fam-media-gallery .fam-card[data-item="6"] { background-color: #241004; }
+.fam-media-gallery .fam-card[data-item="7"] { background-color: #1f0f0f; }
+.fam-media-gallery .fam-card[data-item="8"] { background-color: #c69851; }
+.fam-media-gallery .fam-card[data-item="9"] { background-color: #524617; }
+
+/* Service Top Content (Logo) */
+.fam-media-gallery .media-gallery-top-content {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  padding-block-start: 15px;
+  padding-inline-end: 15px;
+  box-sizing: border-box;
+  z-index: 4;
+}
+
+@media only screen and (max-width: 1068px) {
+  .fam-media-gallery .media-gallery-top-content {
+    padding-block-start: 0;
+    padding-inline-end: 0;
+    justify-content: center;
+    margin-top: 13px;
+  }
+}
+
+.media-gallery-logo {
+  fill: #fff;
+  height: 21px;
+}
+
+@media only screen and (max-width: 1068px) {
+  .media-gallery-logo {
+    height: 20px;
+  }
+}
+
+.media-gallery-logo-fitness { width: 78px; }
+.media-gallery-logo-arcade { width: 68px; }
+.media-gallery-logo-music { width: 59px; }
+
+@media only screen and (max-width: 1068px) {
+  .media-gallery-logo-fitness { width: 88px; }
+  .media-gallery-logo-arcade { width: 72px; }
+  .media-gallery-logo-music { width: 64px; }
+}
+
+.theme-light .media-gallery-logo-music > svg,
+.fam-card[data-item="1"] .media-gallery-logo {
+  fill: #1d1d1f;
+}
+
+/* FAM Scrim Gradients */
+.fam-media-gallery .theme-dark .media-gallery-contents {
+  background: linear-gradient(to bottom, rgba(29, 29, 31, 0.4) 0%, rgba(29, 29, 31, 0) 70px, rgba(29, 29, 31, 0) calc(100% - 70px), rgba(29, 29, 31, 0.4) 100%);
+}
+
+@media only screen and (max-width: 1068px) {
+  .fam-media-gallery .theme-dark .media-gallery-contents {
+    background: linear-gradient(to bottom, rgba(29, 29, 31, 0.45) 0%, rgba(29, 29, 31, 0) 60px, rgba(29, 29, 31, 0) calc(100% - 120px), rgba(29, 29, 31, 0.45) 100%);
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  .fam-media-gallery .theme-dark .media-gallery-contents {
+    background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7)),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(255, 255, 255, 0) 200px);
+  }
+}
+
+/* Background Artwork */
+.fam-media-gallery .fam-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Music Card Square Album Art */
+.media-gallery-bg-wrapper-music {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1068px) {
+  .media-gallery-bg-wrapper-music {
+    flex-direction: column;
+  }
+}
+
+.media-gallery-bg.media-gallery-bg-music {
+  width: 226px;
+  height: 226px;
+  margin-left: 19px;
+  border-radius: 8px;
+  box-shadow: 3px 5px 30px rgba(0, 0, 0, 0.22);
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1440px) {
+  .media-gallery-bg.media-gallery-bg-music {
+    width: 196px;
+    height: 196px;
+  }
+}
+
+@media only screen and (max-width: 1068px) {
+  .media-gallery-bg.media-gallery-bg-music {
+    width: 122px;
+    height: 122px;
+    margin-left: 0;
+    margin-top: 46px;
+  }
+}
+
+.media-gallery-longnote-music {
+  margin-left: 19px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+@media only screen and (max-width: 1068px) {
+  .media-gallery-longnote-music {
+    display: none;
+  }
+}
+
+/* FAM Bottom Content */
+.fam-media-gallery .media-gallery-bottom-content {
+  padding-left: 19px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row-reverse;
+}
+
+@media only screen and (max-width: 1068px) {
+  .fam-media-gallery .media-gallery-bottom-content {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+    justify-content: center;
+    flex-flow: column-reverse;
+  }
+}
+
+@media only screen and (max-width: 734px) {
+  .fam-media-gallery .media-gallery-bottom-content {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.fam-media-gallery .fam-card-title {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.fam-card[data-item="1"] .fam-card-title {
+  color: #1d1d1f;
+  text-shadow: none;
+}
+
+@media only screen and (max-width: 1068px) {
+  .fam-media-gallery .fam-card-title {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+}
+
+/* FAM Buttons */
+.fam-media-gallery .button.media-gallery-button {
+  background-color: rgb(245, 245, 247);
+  color: rgb(0, 0, 0);
+  border-radius: 980px;
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  min-width: 60px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.fam-card[data-item="1"] .button.media-gallery-button {
+  background-color: rgb(29, 29, 31);
+  color: #fff;
+}
+
+@media only screen and (max-width: 1068px) {
+  .fam-media-gallery .button.media-gallery-button {
+    padding: 4px 11px;
+    min-width: 45px;
+    font-size: 12px;
+  }
+}
+
+.fam-media-gallery .button.media-gallery-button:hover {
+  background-color: #ffffff;
+}
+
+.fam-card[data-item="1"] .button.media-gallery-button:hover {
+  background-color: #272729;
+}
